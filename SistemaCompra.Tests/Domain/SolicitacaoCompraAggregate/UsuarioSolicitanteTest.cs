@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SistemaCompra.Tests.Domain
+namespace SistemaCompra.Tests.Domain.SolicitacaoCompraAggregate
 {
     public class UsuarioSolicitanteTest
     {
