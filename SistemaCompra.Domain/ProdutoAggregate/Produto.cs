@@ -18,8 +18,8 @@ namespace SistemaCompra.Domain.ProdutoAggregate
         public Produto(string nome, string descricao, string categoria, decimal preco)
         {
             Id = Guid.NewGuid();
-            Nome = nome ?? throw new ArgumentNullException(nameof(nome));
-            Descricao = descricao ?? throw new ArgumentNullException(nameof(descricao));
+            Nome = !string.IsNullOrWhiteSpace(nome) ? nome : throw new ArgumentNullException(nameof(nome));
+            Descricao = !string.IsNullOrWhiteSpace(descricao) ?  descricao : throw new ArgumentNullException(nameof(descricao));
             Preco = new Money(preco);
             Categoria = (Categoria) Enum.Parse(typeof(Categoria), categoria);
             Situacao = Situacao.Ativo;

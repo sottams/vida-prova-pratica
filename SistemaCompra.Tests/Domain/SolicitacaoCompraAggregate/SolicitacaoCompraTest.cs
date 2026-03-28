@@ -4,7 +4,7 @@ using SistemaCompra.Domain.SolicitacaoCompraAggregate;
 using System;
 using System.Collections.Generic;
 
-namespace SistemaCompra.Tests.Domain
+namespace SistemaCompra.Tests.Domain.SolicitacaoCompraAggregate
 {
     public class SolicitacaoCompraTests
     {
