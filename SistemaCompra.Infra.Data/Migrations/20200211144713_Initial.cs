@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace SistemaCompra.API.Migrations
+namespace SistemaCompra.Infra.Data.Migrations
 {
     public partial class Initial : Migration
     {

@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace SistemaCompra.API.Migrations
+namespace SistemaCompra.Infra.Data.Migrations
 {
     /// <inheritdoc />
     public partial class AddSolicitacaoCompra : Migration

@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SistemaCompra.Infra.Data;
 
-namespace SistemaCompra.API.Migrations
+namespace SistemaCompra.Infra.Data.Migrations
 {
     [DbContext(typeof(SistemaCompraContext))]
-    [Migration("20200212150007_AddSituacaoProduto")]
-    partial class AddSituacaoProduto
+    [Migration("20200211170032_Add-SolicitacaoAndItem")]
+    partial class AddSolicitacaoAndItem
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -35,9 +35,6 @@ namespace SistemaCompra.API.Migrations
 
                     b.Property<string>("Nome")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Situacao")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

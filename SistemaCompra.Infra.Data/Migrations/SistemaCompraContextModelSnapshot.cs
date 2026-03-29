@@ -8,7 +8,7 @@ using SistemaCompra.Infra.Data;
 
 #nullable disable
 
-namespace SistemaCompra.API.Migrations
+namespace SistemaCompra.Infra.Data.Migrations
 {
     [DbContext(typeof(SistemaCompraContext))]
     partial class SistemaCompraContextModelSnapshot : ModelSnapshot

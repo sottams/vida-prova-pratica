@@ -20,17 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20200210203313_initialize.cs" />
-    <Compile Remove="Migrations\20200210203313_initialize.Designer.cs" />
-    <Compile Remove="Migrations\20200210203712_initialize.cs" />
-    <Compile Remove="Migrations\20200210203712_initialize.Designer.cs" />
-    <Compile Remove="Migrations\20200211143958_ProdutoConfig.cs" />
-    <Compile Remove="Migrations\20200211143958_ProdutoConfig.Designer.cs" />
-    <Compile Remove="Migrations\20200211144547_Initial.cs" />
-    <Compile Remove="Migrations\20200211144547_Initial.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\SistemaCompra.Application\SistemaCompra.Application.csproj" />
     <ProjectReference Include="..\SistemaCompra.Infra.Data\SistemaCompra.Infra.Data.csproj" />
   </ItemGroup>

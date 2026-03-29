@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SistemaCompra.Infra.Data;
 
-namespace SistemaCompra.API.Migrations
+namespace SistemaCompra.Infra.Data.Migrations
 {
     [DbContext(typeof(SistemaCompraContext))]
-    [Migration("20200211144713_Initial")]
-    partial class Initial
+    [Migration("20200212150007_AddSituacaoProduto")]
+    partial class AddSituacaoProduto
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -35,6 +35,9 @@ namespace SistemaCompra.API.Migrations
 
                     b.Property<string>("Nome")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Situacao")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -89,6 +92,10 @@ namespace SistemaCompra.API.Migrations
                             b1.Property<Guid>("ProdutoId")
                                 .HasColumnType("uniqueidentifier");
 
+                            b1.Property<decimal>("Value")
+                                .HasColumnName("Preco")
+                                .HasColumnType("decimal(18,2)");
+
                             b1.HasKey("ProdutoId");
 
                             b1.ToTable("Produto");
@@ -116,6 +123,10 @@ namespace SistemaCompra.API.Migrations
                             b1.Property<Guid>("SolicitacaoCompraId")
                                 .HasColumnType("uniqueidentifier");
 
+                            b1.Property<decimal>("Value")
+                                .HasColumnName("TotalGeral")
+                                .HasColumnType("decimal(18,2)");
+
                             b1.HasKey("SolicitacaoCompraId");
 
                             b1.ToTable("SolicitacaoCompra");
@@ -130,6 +141,7 @@ namespace SistemaCompra.API.Migrations
                                 .HasColumnType("uniqueidentifier");
 
                             b1.Property<int>("Valor")
+                                .HasColumnName("CondicaoPagamento")
                                 .HasColumnType("int");
 
                             b1.HasKey("SolicitacaoCompraId");
@@ -145,6 +157,10 @@ namespace SistemaCompra.API.Migrations
                             b1.Property<Guid>("SolicitacaoCompraId")
                                 .HasColumnType("uniqueidentifier");
 
+                            b1.Property<string>("Nome")
+                                .HasColumnName("NomeFornecedor")
+                                .HasColumnType("nvarchar(max)");
+
                             b1.HasKey("SolicitacaoCompraId");
 
                             b1.ToTable("SolicitacaoCompra");
@@ -157,6 +173,10 @@ namespace SistemaCompra.API.Migrations
                         {
                             b1.Property<Guid>("SolicitacaoCompraId")
                                 .HasColumnType("uniqueidentifier");
+
+                            b1.Property<string>("Nome")
+                                .HasColumnName("UsuarioSolicitante")
+                                .HasColumnType("nvarchar(max)");
 
                             b1.HasKey("SolicitacaoCompraId");
 

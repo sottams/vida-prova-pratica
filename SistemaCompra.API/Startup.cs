@@ -40,8 +40,7 @@ namespace SistemaCompra.API
 
             services.AddDbContext<SistemaCompraContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection"), 
-                    o=> o.MigrationsAssembly("SistemaCompra.API"))
+                    Configuration.GetConnectionString("DefaultConnection"))
             );
 
             services.AddSwaggerGen(c =>
