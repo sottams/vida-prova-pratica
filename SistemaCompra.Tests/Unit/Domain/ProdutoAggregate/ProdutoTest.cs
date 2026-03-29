@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SistemaCompra.Tests.Domain.ProdutoAggregate
+namespace SistemaCompra.Tests.Unit.Domain.ProdutoAggregate
 {
     public class ProdutoTest
     {
