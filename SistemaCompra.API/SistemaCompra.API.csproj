@@ -9,10 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="SolicitacaoCompra\**" />
-    <Content Remove="SolicitacaoCompra\**" />
-    <EmbeddedResource Remove="SolicitacaoCompra\**" />
-    <None Remove="SolicitacaoCompra\**" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.22">
