@@ -4,9 +4,11 @@ using SistemaCompra.Application.Produto.Command.AtualizarPreco;
 using SistemaCompra.Application.Produto.Command.RegistrarProduto;
 using SistemaCompra.Application.Produto.Query.ObterProduto;
 using System;
+using System.Threading.Tasks;
 
 namespace SistemaCompra.API.Produto
 {
+    [ApiController]
     public class ProdutoController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -17,10 +19,10 @@ namespace SistemaCompra.API.Produto
         }
 
         [HttpGet, Route("produto/{id}")]
-        public IActionResult Obter(Guid id)
+        public async Task<IActionResult> Obter(Guid id)
         {
             var query = new ObterProdutoQuery() { Id = id };
-            var produtoViewModel = _mediator.Send(query);
+            var produtoViewModel = await _mediator.Send(query);
             return Ok(produtoViewModel);
         }
 
@@ -29,9 +31,9 @@ namespace SistemaCompra.API.Produto
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
-        public IActionResult CadastrarProduto([FromBody] RegistrarProdutoCommand registrarProdutoCommand)
+        public async Task<IActionResult> CadastrarProduto([FromBody] RegistrarProdutoCommand registrarProdutoCommand)
         {
-            _mediator.Send(registrarProdutoCommand);
+            await _mediator.Send(registrarProdutoCommand);
             return StatusCode(201);
         }
 
@@ -40,9 +42,9 @@ namespace SistemaCompra.API.Produto
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
-        public IActionResult AtualizarPreco([FromBody] AtualizarPrecoCommand atualizarPrecoCommand)
+        public async Task<IActionResult> AtualizarPreco([FromBody] AtualizarPrecoCommand atualizarPrecoCommand)
         {
-             _mediator.Send(atualizarPrecoCommand);
+            await _mediator.Send(atualizarPrecoCommand);
             return Ok();
 
         }

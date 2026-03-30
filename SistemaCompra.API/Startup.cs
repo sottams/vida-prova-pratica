@@ -56,7 +56,7 @@ namespace SistemaCompra.API
             {
                 app.UseDeveloperExceptionPage();
             }
-            
+            app.UseMiddleware<Middleware.ExceptionMiddleware>();
             app.UseRouting();
 
             app.UseAuthorization();
