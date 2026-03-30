@@ -1,14 +1,15 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-Workdir /src
+WORKDIR /src
 
 COPY SistemaCompras.sln .
-COPY SistemaCompras.Api/SistemaCompras.Api.csproj							./SistemaCompras.Api/
-COPY SistemaCompras.Application/SistemaCompras.Application.csproj			./SistemaCompras.Application/
-COPY SistemaCompras.Domain/SistemaCompras.Domain.csproj						./SistemaCompras.Domain/
-COPY SistemasCompras.Domain.Core/SistemasCompras.Domain.Core.csproj			./SistemasCompras.Domain.Core/
-COPY SistemaCompras.Infra.Data/SistemaCompras.Infra.Data.csproj				./SistemaCompras.Infra.Data/
+COPY SistemaCompra.API/SistemaCompra.API.csproj                 ./SistemaCompra.API/
+COPY SistemaCompra.Application/SistemaCompra.Application.csproj ./SistemaCompra.Application/
+COPY SistemaCompra.Domain/SistemaCompra.Domain.csproj           ./SistemaCompra.Domain/
+COPY SistemaCompra.Domain.Core/SistemaCompra.Domain.Core.csproj ./SistemaCompra.Domain.Core/
+COPY SistemaCompra.Infra.Data/SistemaCompra.Infra.Data.csproj   ./SistemaCompra.Infra.Data/
 
-RUN dotnet restore
+RUN dotnet restore SistemaCompra.API/SistemaCompra.API.csproj
+
 
 COPY . .
 
