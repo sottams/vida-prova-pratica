@@ -57,6 +57,13 @@ namespace SistemaCompra.API
                 app.UseDeveloperExceptionPage();
             }
             app.UseMiddleware<Middleware.ExceptionMiddleware>();
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Prova TI VIDA V1");
+            });
             app.UseRouting();
 
             app.UseAuthorization();
@@ -66,12 +73,6 @@ namespace SistemaCompra.API
                 endpoints.MapControllers();
             });
 
-            app.UseSwagger();
-
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Prova TI VIDA V1");
-            });
         }
     }
 }
