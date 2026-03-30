@@ -35,6 +35,11 @@ namespace SistemaCompra.Tests.Unit.Domain.ProdutoAggregate
         {
             Assert.Throws<ArgumentNullException>(() => new Produto("Produto Teste", "", "Madeira", 100));
         }
+        [Fact]
+        public void Construtor_CategoriaInvalida()
+        {
+            Assert.Throws<ArgumentException>(() => new Produto("Produto Teste", "Descrição Teste", "Categoria Invalida", 100));
+        }
 
         //Teste para Ativar
         [Fact]

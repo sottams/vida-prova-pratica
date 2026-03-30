@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using SistemaCompra.Domain.Core;
 using SistemaCompra.Infra.Data.UoW;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -15,11 +16,10 @@ namespace SistemaCompra.Application
             _uow = uow;
         }
 
-        public bool Commit()
+        public void Commit()
         {
-            if (_uow.Commit()) return true;
-
-            return false;
+            if (!_uow.Commit())
+                throw new InvalidOperationException("Ocorreu um erro ao salvar os dados.");
         }
     }
 }
