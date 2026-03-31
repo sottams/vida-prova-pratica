@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SistemaCompra.Application
+namespace SistemaCompra.Domain.Events
 {
-    public interface IEventPublisher
+    public interface IDomainEventDispatcher
     {
-        Task PublishAsync<T>(T evento);
+        Task Dispatch<T>(T evento);
     }
 }

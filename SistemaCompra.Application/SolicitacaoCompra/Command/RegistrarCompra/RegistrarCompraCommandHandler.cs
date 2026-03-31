@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using SistemaCompra.Application.SolicitacaoCompra.Events;
+using SistemaCompra.Domain.Events;
 using SistemaCompra.Domain.ProdutoAggregate;
 using SistemaCompra.Domain.SolicitacaoCompraAggregate;
 using SistemaCompra.Infra.Data.UoW;
@@ -18,17 +19,17 @@ namespace SistemaCompra.Application.SolicitacaoCompra.Command.RegistrarCompra
     {
         private readonly ISolicitacaoCompraRepository _solicitacaoCompraRepository;
         private readonly IProdutoRepository _produtoRepository;
-        private readonly IEventPublisher _eventPublisher;
+        private readonly IDomainEventDispatcher _dispatcher;
 
         public RegistrarCompraCommandHandler(
             ISolicitacaoCompraRepository solicitacaoCompraRepository,
             IProdutoRepository produtoRepository,
-            IEventPublisher eventPublisher,
+            IDomainEventDispatcher dispatcher,
             IUnitOfWork uow) : base(uow)
         {
             _solicitacaoCompraRepository = solicitacaoCompraRepository;
             _produtoRepository = produtoRepository;
-            _eventPublisher = eventPublisher;
+            _dispatcher = dispatcher;
         }
 
         public async Task<Unit> Handle(RegistrarCompraCommand request, CancellationToken cancellationToken)
@@ -45,13 +46,20 @@ namespace SistemaCompra.Application.SolicitacaoCompra.Command.RegistrarCompra
 
             Commit();
 
-            await _eventPublisher.PublishAsync(new CompraRegistrada
-            {
-                IdSolicitacao = solicitacao.Id,
-                UsuarioSolicitante = request.UsuarioSolicitante,
-                NomeFornecedor = request.NomeFornecedor,
-                DataRegistro = DateTime.UtcNow
-            });
+            await _dispatcher.Dispatch(
+                new CompraRegistrada
+                {
+                    UsuarioSolicitante = solicitacao.UsuarioSolicitante.Nome,
+                    NomeFornecedor = solicitacao.NomeFornecedor.Nome,
+                    DataRegistro = solicitacao.Data,
+                    ValorTotal = solicitacao.TotalGeral.Value,
+                    Itens = solicitacao.Itens.Select(i => new ItemCompraRegistrada
+                    {
+                        NomeProduto = i.Produto.Nome,
+                        Quantidade = i.Qtde,
+                        Subtotal = i.Subtotal.Value
+                    }).ToList()
+                });
 
             return Unit.Value;
         }

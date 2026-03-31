@@ -2,7 +2,10 @@
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using NuGet.Protocol.Plugins;
 using SistemaCompra.API;
+using SistemaCompra.Application.SolicitacaoCompra.Events;
+using SistemaCompra.Domain.Events;
 using SistemaCompra.Infra.Data;
 using System;
 using System.Collections.Generic;
