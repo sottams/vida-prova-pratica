@@ -7,9 +7,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using RabbitMQ.Client;
+using SistemaCompra.Application.SolicitacaoCompra.Events;
+using SistemaCompra.Domain.Events;
 using SistemaCompra.Domain.ProdutoAggregate;
 using SistemaCompra.Domain.SolicitacaoCompraAggregate;
 using SistemaCompra.Infra.Data;
+using SistemaCompra.Infra.Data.Events;
 using SistemaCompra.Infra.Data.Produto;
 using SistemaCompra.Infra.Data.SolicitacaoCompra;
 using SistemaCompra.Infra.Data.UoW;
@@ -19,12 +23,16 @@ namespace SistemaCompra.API
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
+            Environment = env;
         }
 
         public IConfiguration Configuration { get; }
+        public IWebHostEnvironment Environment { get; }
+
+
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -46,8 +54,22 @@ namespace SistemaCompra.API
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Prova TI VIDA", Version = "v1" });
-            });          
+            });
+            
+            if (!Environment.IsEnvironment("Testing"))
+            {
+                var rabbitConnection = new ConnectionFactory
+            {
+                HostName = Configuration["RabbitMQ:Host"],
+                UserName = Configuration["RabbitMQ:User"],
+                Password = Configuration["RabbitMQ:Password"]
+            }.CreateConnection();
 
+            services.AddSingleton<IConnection>(rabbitConnection);
+            services.AddScoped<IDomainEventHandler<CompraRegistrada>, PublicarMensagemCompraRegistradaHandler>();
+            }
+            services.AddScoped<IDomainEventDispatcher, DomainEventDispatcher>();
+            services.AddScoped<IDomainEventHandler<CompraRegistrada>, EnviarEmailCompraRegistradaHandler>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
